@@ -1,9 +1,11 @@
 library(shiny)
 
-# Load in the sampled matrix we've generated ahead of time.
+# Load in the sampled matrices we've generated ahead of time.
 tumor <- readRDS("tumorExpr.Rds")
+# Distill the expression data away from the ExpressionSet object.
 tumorExp <- exprs(tumor)
 
+# And now the normal sample.
 normal <- readRDS("normalExpr.Rds")
 normalExp <- exprs(normal)
 
