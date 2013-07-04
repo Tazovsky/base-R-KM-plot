@@ -2,7 +2,10 @@ library(shiny)
 
 # Load in the sampled matrix we've generated ahead of time.
 tumor <- readRDS("tumorExpr.Rds")
+tumorExp <- exprs(tumor)
+
 normal <- readRDS("normalExpr.Rds")
+normalExp <- exprs(normal)
 
 shinyServer(function(input, output) {
   # Expression that generates a plot of the distribution. The expression
@@ -15,8 +18,8 @@ shinyServer(function(input, output) {
   output$genePlot <- renderPlot({
     
     #Extract the relevant tumor and normal expression values.
-    tumorGene <- tumor[rownames(tumor) == input$gene, ]
-    normalGene <- normal[rownames(normal) == input$gene, ]
+    tumorGene <- tumorExp[rownames(tumorExp) == input$gene, ]
+    normalGene <- normalExp[rownames(normalExp) == input$gene, ]
     
     #Format as a list and plot as a boxplot
     expr <- list(Tumor=tumorGene, Normal=normalGene)
