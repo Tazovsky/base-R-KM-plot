@@ -1,14 +1,14 @@
 Bioconductor Shiny Example #1
 ==============================
 
-Simple app comparing the expression of genes between Tumor and Normal tissue.
+Simple app showing the relationship between a gene's expression and survival.
 
 This is an example Shiny app featuring some basic analysis of Ovarian Cancer gene expression data collected on the Affymetrix U133A platform. We filter the available genes and samples down to a much smaller matrix to make reproducibility simpler for a broader audience. The R code involved in sampling the data is available in this Gist as an R-Markdown file, and the sampled data are available in this Gist as Rds files.
 
 To run the application, install shiny (`install.packages("shiny")`) then run the following command:
 
     library(shiny)
-    runGist(5924147)
+    runGist(5929598)
 
 The relevant citation for the original data is available below:
 
