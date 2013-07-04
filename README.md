@@ -1,4 +1,4 @@
-Bioconductor Shiny Example #1
+Bioconductor Shiny Example #3
 ==============================
 
 Simple app showing the relationship between a gene's expression and survival.
