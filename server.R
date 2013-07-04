@@ -1,4 +1,5 @@
 library(shiny)
+library(Biobase)
 
 # Load in the sampled matrices we've generated ahead of time.
 tumor <- readRDS("tumorExpr.Rds")
