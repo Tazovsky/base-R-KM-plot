@@ -1,0 +1,59 @@
+Extract and Store Some Data
+========================================================
+
+We'll first want to install the `curatedOvarianData` package from Bioconductor. Note that this package is a few hundred MB.
+
+```{r, cache=TRUE, results='hide', message=FALSE}
+source("http://bioconductor.org/biocLite.R")
+biocLite("curatedOvarianData")
+```
+
+Now we'll load the package and load in one of the datasets.
+
+```{r, results='hide', message=FALSE}
+library(curatedOvarianData)
+data(TCGA_eset)
+```
+
+Let's write out the clinical data so we have it for later. We'll trim out the "uncurated" metadata column to save some space and make the printing a bit easier.
+
+```{r}
+clinical <- pData(TCGA_eset)
+clinical <- clinical[,colnames(clinical)!="uncurated_author_metadata"]
+```
+
+We won't want to store all of the tumor samples available in the dataset, so let's grab 20 tumor samples at random and keep all of the normal samples.
+
+```{r}
+normalClinical <- clinical[clinical$sample_type == "adjacentnormal",]
+
+tumorIndices <- sample(which(clinical$sample_type == "tumor"), 20)
+tumorClinical <- clinical[tumorIndices,]
+saveRDS(tumorClinical, "tumorClinical.Rds")
+```
+
+Filtering
+---------
+
+For the sake of demonstration, we'll want to keep the dataset fairly small. So let's filter the data to the few dozen samples we selected above and only 8 genes.
+
+```{r}
+geneList <- c("EGFR", "KLF6", "FOXO1", "KRAS", "JAK2", "BRCA1", "BRCA2", "PPM1D")
+```
+
+```{r}
+tumor <- exprs(TCGA_eset[,tumorIndices])
+tumor <- tumor[match(geneList, rownames(tumor)),]
+saveRDS(tumor, "tumorExpr.Rds")
+```
+
+
+And grab all of the normal tissue samples:
+
+```{r}
+normal <- exprs(TCGA_eset[,TCGA_eset@phenoData@data$sample_type == "adjacentnormal"])
+normal <- normal[match(geneList, rownames(normal)),]
+saveRDS(normal, "normalExpr.Rds")
+```
+
+Now we should be able to use this sampled data from our apps!
