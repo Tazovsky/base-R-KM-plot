@@ -9,7 +9,10 @@ shinyUI(pageWithSidebar(
   # Sidebar with a selector to choose a gene
   sidebarPanel(
     selectInput("gene", "Gene", geneList),
-    plotOutput("densityPlot"),
+    plotOutput("densityPlot", 
+               clickId="densityClick", 
+               hoverId="densityHover",
+               hoverDelay=100),
     sliderInput("cutoff", "Cutoff", min=3, max=11, step=.5, value=7)
   ),
   

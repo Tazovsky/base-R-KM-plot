@@ -28,8 +28,11 @@ shinyServer(function(input, output, session) {
     tumorGene <- geneExp()
     plot(density(tumorGene), main="Distribution", xlab="")
     
+    print (input$densityClick)
+    
     # Add a vertical line to show where the current cutoff is.
     abline(v=input$cutoff, col=4)
+    
   })
   
   #' A reactive survival formula
