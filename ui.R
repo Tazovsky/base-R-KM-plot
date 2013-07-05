@@ -12,8 +12,7 @@ shinyUI(pageWithSidebar(
     plotOutput("densityPlot", 
                clickId="densityClick", 
                hoverId="densityHover",
-               hoverDelay=100),
-    sliderInput("cutoff", "Cutoff", min=3, max=11, step=.5, value=7)
+               hoverDelay=75)
   ),
   
   # Show a plot of the generated distribution
