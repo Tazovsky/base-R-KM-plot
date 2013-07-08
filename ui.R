@@ -12,7 +12,8 @@ shinyUI(pageWithSidebar(
     plotOutput("densityPlot", 
                clickId="densityClick", 
                hoverId="densityHover",
-               hoverDelay=75)
+               hoverDelay=250,
+               hoverDelayType="throttle")
   ),
   
   # Show a plot of the generated distribution
